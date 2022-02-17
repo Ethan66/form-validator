@@ -1,6 +1,6 @@
 {
-  "name": "form-validator",
-  "version": "0.0.0",
+  "name": "submit-valid",
+  "version": "0.0.2",
   "main": "lib/validator.js",
   "module": "es/validator.js",
   "types": "es/validator.d.ts",
@@ -35,14 +35,11 @@
     "typescript": "^3.7.3"
   },
   "publishConfig": {
-    "registry": "https://registry.npm.taobao.org/"
+    "registry": "https://registry.npmjs.org/"
   },
   "keywords": [
-    "data utils",
-    "schema",
-    "validate",
-    "validator",
-    "validation"
+    "form-validate",
+    "validator"
   ],
   "author": "zhuangcheng <zhuangcheng@lingzikg.com>",
   "license": "MIT"

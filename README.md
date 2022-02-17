@@ -1,6 +1,8 @@
 ## 表单校验库
 
-引用库模块：
+A library of supports chained check data.
+
+### 引用库模块：
 
 ```javascript
 
