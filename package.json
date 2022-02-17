@@ -1,6 +1,6 @@
 {
   "name": "submit-valid",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "main": "lib/validator.js",
   "module": "es/validator.js",
   "types": "es/validator.d.ts",
@@ -14,7 +14,8 @@
     "test": "jest",
     "test-c": "jest --coverage",
     "fix": "eslint --fix ./src/**/*.ts",
-    "eslint": "eslint ./src/**/*.ts"
+    "eslint": "eslint ./src/**/*.ts",
+    "pub": "npm run build & npm publish"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.2",

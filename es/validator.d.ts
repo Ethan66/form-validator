@@ -1,22 +1,25 @@
-import Chain, { TypeStruct, Method, AsyncMethod, ResultObject, Callback, TypeMessages } from './chain';
-export { Method, AsyncMethod, ResultObject, Callback, TypeMessages, Chain };
-interface TypeValue {
-    [key: string]: any;
-    [key: number]: any;
-}
+import Chain, { TypeStruct, ResultObject } from './chain';
 export interface Validator<T> {
-    readonly string: T;
-    readonly number: T;
-    readonly object: T;
-    readonly array: T;
+    readonly str: T;
+    readonly num: T;
+    readonly obj: T;
+    readonly arr: T;
     readonly boolean: T;
     readonly any: T;
-    printout: boolean;
-    singleMode: boolean;
-    validate(data: string | number | boolean | null | undefined, struct: T): boolean | Promise<boolean>;
-    validate(data: object, struct: TypeStruct): boolean | Promise<boolean>;
-    validate(data: any, struct: TypeStruct): boolean | Promise<boolean>;
-    get(obj: TypeValue, path: string | (string | number)[]): any;
+    _then: boolean;
+    _catchResult: ResultObject[];
+    judge(data: string | number | boolean | null | undefined, struct: T): boolean | Promise<boolean> | Validator<T>;
+    judge(data: object, struct: TypeStruct): boolean | Promise<boolean> | Validator<T>;
+    judge(data: any, struct: TypeStruct): boolean | Promise<boolean> | Validator<T>;
+    validate(data: any, struct: TypeStruct): Validator<T>;
+    valid(data: string | number | boolean | null | undefined): T;
+    valid(data: string | number | boolean | null | undefined, path: string | (string | number)[]): T;
+    get(obj: Obj, path: string | (string | number)[]): any;
+    then(fn: (result: boolean) => any): Validator<T>;
+    catch(fn: (result: ResultObject[]) => any): Validator<T>;
+}
+interface Obj {
+    [key: string]: any;
 }
 declare const validator: Validator<Chain>;
 export default validator;
