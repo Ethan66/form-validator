@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1645062254679" clover="3.2.0">
-  <project timestamp="1645062254679" name="All files">
+<coverage generated="1645065149715" clover="3.2.0">
+  <project timestamp="1645065149716" name="All files">
     <metrics statements="299" coveredstatements="247" conditionals="193" coveredconditionals="128" methods="78" coveredmethods="64" elements="570" coveredelements="439" complexity="0" loc="299" ncloc="299" packages="1" files="6" classes="6"/>
     <file name="chain.ts" path="D:\Ethan\myCode\form-validator\src\chain.ts">
       <metrics statements="64" coveredstatements="52" conditionals="31" coveredconditionals="11" methods="11" coveredmethods="10"/>
