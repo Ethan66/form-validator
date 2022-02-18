@@ -13,6 +13,13 @@ type ResultArray = [
   (string | number)[]?,
   [Callback?, Callback?]?
 ]
+
+export type ValidateFnResult = {
+  _then: boolean;
+  _catchResult: ResultObject[];
+  then(fn: (result: boolean) => any): ValidateFnResult;
+  catch(fn: (result: ResultObject[]) => any): ValidateFnResult;
+}
 interface Obj {
   [key: string]: any;
 }
@@ -74,21 +81,31 @@ export function checkResult(results: (boolean|ResultObject)[]) {
  * @param results
  */
 export function checkResult2(results: (boolean|ResultObject)[]) {
+  const data: ValidateFnResult = {
+    _then: false,
+    _catchResult: [],
+    then(fn) {
+      if (this._then) {
+        fn(true)
+      }
+      return this
+    },
+    catch(fn) {
+      if (!this._then) {
+        fn(this._catchResult)
+      }
+      return this
+    }
+  }
   if (results.length) {
     const arr = results.filter(item => item !== true)
     if (!arr.length) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      this._then = true
+      data._then = true
     } else {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      this._catchResult = arr
+      data._catchResult = arr as ResultObject[]
     }
   }
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
-  return this
+  return data
 }
 
 /**
@@ -203,8 +220,10 @@ export function findValue(obj: Obj, path: (string | number)[]): any {
  * @param parentPath
  * @param getResult
  */
+ export function check(data: string|number|boolean|null|undefined, struct: TypeStruct): boolean | Promise<boolean>;
+ export function check(data: object, struct: TypeStruct, parentPath?: (string | number)[], getResult?: boolean): ValidateFnResult;
 export function check(value: any, struct: TypeStruct, parentPath?: (string | number)[], getResult?: boolean):
- boolean | Promise<boolean> |  Validator<Chain> {
+ boolean | Promise<boolean> |  ValidateFnResult {
   if(typeof value !== 'object' && !(struct instanceof Chain)) throw new Error('无效参数')
   const results: (boolean|ResultObject)[] = [], asyncFuncs: (Promise<ResultArray>)[] = []
   if (struct instanceof Chain) {

@@ -283,7 +283,7 @@ describe('objCallback', () => {
         }
       }).catch(e => {
         if (!result) {
-          expect(JSON.stringify(e[0]?.keys) === JSON.stringify(['num'])).toBe(!result)
+          expect(JSON.stringify(e[0]?.keys) === JSON.stringify(['str'])).toBe(!result)
         }
       })
     })
@@ -294,9 +294,9 @@ describe('objCallback', () => {
     c: { c1: 123, c2: '4534' }
   }, true)
   objCallback({
-    a: 123,
+    a: 123456,
     b: [1,3],
-    c: { c1: '123', c2: '4534' }
+    c: { c1: 123, c2: '4534' }
   }, false)
 })
 

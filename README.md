@@ -6,7 +6,7 @@ A library of supports chained check data.
 
 ```javascript
 
-import v from 'form-validator'
+import v from 'submit-valid'
 // judge：判断函数（支持基本类型和引用类型），返回true || false
 v.judge("dafb", v.str.len(4).min(3)) // true
 
