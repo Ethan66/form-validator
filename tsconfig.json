@@ -14,7 +14,7 @@
         ],
         "declaration": true,
         "declarationMap": true,
-        "types": ["reflect-metadata", "jest"]
+        "types": ["jest"]
    },
    "paths": {
         "@App/*": ["__tests__/*"]
