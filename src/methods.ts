@@ -71,6 +71,7 @@ const methods = {
 
 Object.keys(rules).forEach(key => {
   (methods as {[key: string]: (...values: any[]) => boolean })[key] = (value: string | number) => {
+    if ([null, undefined].includes(value as any)) value = ''
     if (typeof value === 'number') value = String(value)
     return ((rules as {[key: string]: RegExp})[key]).test(value)
   }

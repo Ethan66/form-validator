@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build": "set NODE_ENV=production && rollup -c -m",
-    "dev": "rollup -c",
+    "dev": "rollup -c -w --environment TARGET:dev",
     "test": "jest",
     "test-c": "jest --coverage",
     "fix": "eslint --fix ./src/**/*.ts",
@@ -29,6 +29,7 @@
     "jest": "^27.5.1",
     "mocha": "^7.0.1",
     "rollup": "^1.31.0",
+    "rollup-plugin-serve": "^2.0.1",
     "rollup-plugin-terser": "^5.2.0",
     "rollup-plugin-typescript2": "^0.25.3",
     "ts-jest": "^27.1.3",
