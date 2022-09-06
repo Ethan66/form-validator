@@ -1,2 +1,120 @@
-var t=function(t,n){void 0===n&&(n="");var e="^("+t+"):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&:/~\\+#]*[\\w\\-\\@?^=%&/~\\+#])?";return""!==n&&(e=e+".("+n+")+"),e+="$",new RegExp(e,"i")},n={required:/.+/,english:/^[A-Za-z]+$/,alphanum:/^[a-zA-Z0-9]+$/,chinese:/^[\u2E80-\uFE4F]+$/,nospace:/^\S+$/,float:/^-?(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?$/,positivefloat:/^(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?$/,integer:/^-?\d+$/,positiveint:/^\d+$/,decimal:/^-?\d+\.\d+$/,percent:/^-?\d+(\.\d+)?%$/,email:/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,http:t("https?"),phone:/^((\+86)|(86))?1[3-9]\d{9}$/,year:/^(19|20)\d{2}$/,month:/^(0?[1-9]|1[0-2])$/,day:/^((0?[1-9])|([1-2]\d)|(3[0-1]))$/,hour:/^(([01]?\d)|(2[0-3]))$/,minute:/^(([01]?\d)|([2-5]\d))$/,hmt:/^(\d|[01]\d|2[0-3]):[0-5]\d$/,time:/^(\d|([01]\d|2[0-3])):([0-5]\d):([0-5]\d)$/,date:/^((((1[6-9]|[2-9]\d)\d{2})(-|\/)(0?[13578]|1[02])\5(0?[1-9]|[12]\d|3[01]))|(((1[6-9]|[2-9]\d)\d{2})(-|\/)(0?[13456789]|1[012])\11(0?[1-9]|[12]\d|30))|(((1[6-9]|[2-9]\d)\d{2})(-|\/)0?2\17(0?[1-9]|1\d|2[0-8]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))(-|\/)0?2\25(29)))$/,datetime:/^((((1[6-9]|[2-9]\d)\d{2})(-|\/)(0?[13578]|1[02])\5(0?[1-9]|[12]\d|3[01]))|(((1[6-9]|[2-9]\d)\d{2})(-|\/)(0?[13456789]|1[012])\11(0?[1-9]|[12]\d|30))|(((1[6-9]|[2-9]\d)\d{2})(-|\/)0?2\17(0?[1-9]|1\d|2[0-8]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))(-|\/)0?2\25(29)))\s+(\d|([0-1]\d|2[0-3])):(\d|([0-5]?\d)):(\d|([0-5]?\d))$/,path:/^[a-zA-Z]:[\\]((?! )(?![^\\/]*\s+[\\/])[\w -]+[\\/])*(?! )(?![^.]*\s+\.)[\w -]+$/,file:/^[^<>/\\\|:''\*\?]+\.\w+$/,imgurl:t("https?","gif|png|jpg|jpeg|webp|svg")},e=function(t){return"[object Object]"===Object.prototype.toString.call(t)},r=function(t){return"number"==typeof t?String(t):t};function u(t,n){return"object"==typeof t||"object"==typeof n?JSON.stringify(t)===JSON.stringify(n):o.num(t)||o.num(n)||o.str(t)||o.str(n)||o.boolean(t)||o.boolean(n)?t==n:t===n}var o={obj:e,boolean:function(t){return"boolean"==typeof t},str:function(t){return"string"==typeof t},num:function(t){return"number"==typeof t},arr:function(t){return Array.isArray(t)},func:function(t){return"function"==typeof t},empty:function(t){return!t||(Array.isArray(t)?0===t.length:!!e(t)&&0===Object.keys(t).length)},eq:u,not:function(t,n){return!u(t,n)},gt:function(t,n){return+t>+n},gte:function(t,n){return+t>=+n},lt:function(t,n){return+t<+n},lte:function(t,n){return+t<=+n},len:function(t,n){return r(t).length===+n},min:function(t,n){return r(t).length>=+n},max:function(t,n){return r(t).length<=+n},reg:function(t,n){return n.test(t)},has:function(t,n){return function(t,n){return"number"!=typeof t&&"string"!=typeof t||"number"!=typeof n&&"string"!=typeof n?Array.isArray(t)?t.indexOf(n)>-1:!(!e(t)||"string"!=typeof n)&&Object.keys(t).indexOf(n)>-1:String(t).indexOf(String(n))>-1}(t,n)},ext:function(t,n){return(e=n,new RegExp("\\.("+e+")$","i")).test(t);var e},enum:function(t,n){for(var e=[],r=2;r<arguments.length;r++)e[r-2]=arguments[r];return[n].concat(e).indexOf(t)>-1},between:function(t,n,e){return+t>+n&&+t<+e}};Object.keys(n).forEach((function(t){o[t]=function(e){return"number"==typeof e&&(e=String(e)),n[t].test(e)}}));export default o;
-//# sourceMappingURL=methods.js.map
+var ext = function (types) {
+    return new RegExp("\\.(" + types + ")$", 'i');
+};
+var turl = function (prefix, files) {
+    if (files === void 0) { files = ''; }
+    var s = "^(" + prefix + "):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&:/~\\+#]*[\\w\\-\\@?^=%&/~\\+#])?";
+    if (files !== '')
+        s = s + (".(" + files + ")+");
+    s = s + '$';
+    return new RegExp(s, 'i');
+};
+var rules = {
+    required: /.+/,
+    english: /^[A-Za-z]+$/,
+    alphanum: /^[a-zA-Z0-9]+$/,
+    chinese: /^[\u2E80-\uFE4F]+$/,
+    nospace: /^\S+$/,
+    float: /^-?(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?$/,
+    positivefloat: /^(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?$/,
+    integer: /^-?\d+$/,
+    positiveint: /^\d+$/,
+    decimal: /^-?\d+\.\d+$/,
+    percent: /^-?\d+(\.\d+)?%$/,
+    email: /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
+    http: turl('https?'),
+    phone: /^((\+86)|(86))?1[3-9]\d{9}$/,
+    year: /^(19|20)\d{2}$/,
+    month: /^(0?[1-9]|1[0-2])$/,
+    day: /^((0?[1-9])|([1-2]\d)|(3[0-1]))$/,
+    hour: /^(([01]?\d)|(2[0-3]))$/,
+    minute: /^(([01]?\d)|([2-5]\d))$/,
+    hmt: /^(\d|[01]\d|2[0-3]):[0-5]\d$/,
+    time: /^(\d|([01]\d|2[0-3])):([0-5]\d):([0-5]\d)$/,
+    date: /^((((1[6-9]|[2-9]\d)\d{2})(-|\/)(0?[13578]|1[02])\5(0?[1-9]|[12]\d|3[01]))|(((1[6-9]|[2-9]\d)\d{2})(-|\/)(0?[13456789]|1[012])\11(0?[1-9]|[12]\d|30))|(((1[6-9]|[2-9]\d)\d{2})(-|\/)0?2\17(0?[1-9]|1\d|2[0-8]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))(-|\/)0?2\25(29)))$/,
+    datetime: /^((((1[6-9]|[2-9]\d)\d{2})(-|\/)(0?[13578]|1[02])\5(0?[1-9]|[12]\d|3[01]))|(((1[6-9]|[2-9]\d)\d{2})(-|\/)(0?[13456789]|1[012])\11(0?[1-9]|[12]\d|30))|(((1[6-9]|[2-9]\d)\d{2})(-|\/)0?2\17(0?[1-9]|1\d|2[0-8]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))(-|\/)0?2\25(29)))\s+(\d|([0-1]\d|2[0-3])):(\d|([0-5]?\d)):(\d|([0-5]?\d))$/,
+    path: /^[a-zA-Z]:[\\]((?! )(?![^\\/]*\s+[\\/])[\w -]+[\\/])*(?! )(?![^.]*\s+\.)[\w -]+$/,
+    file: /^[^<>/\\\|:''\*\?]+\.\w+$/,
+    imgurl: turl('https?', 'gif|png|jpg|jpeg|webp|svg')
+};
+
+var isObject = function (arg) {
+    return Object.prototype.toString.call(arg) === '[object Object]';
+};
+var num2str = function (arg) {
+    return typeof arg === 'number' ? String(arg) : arg;
+};
+function checkInclude(value, arg) {
+    if ((typeof value === 'number' || typeof value === 'string') &&
+        (typeof arg === 'number' || typeof arg === 'string')) {
+        return String(value).indexOf(String(arg)) > -1;
+    }
+    else if (Array.isArray(value)) {
+        return value.indexOf(arg) > -1;
+    }
+    else if (isObject(value) && typeof arg === 'string') {
+        return Object.keys(value).indexOf(arg) > -1;
+    }
+    return false;
+}
+function has(value, arg) {
+    return checkInclude(value, arg);
+}
+function eq(value, arg) {
+    if (typeof value === 'object' || typeof arg === 'object') {
+        return JSON.stringify(value) === JSON.stringify(arg);
+    }
+    if (methods.num(value) || methods.num(arg) || methods.str(value) || methods.str(arg) || methods.boolean(value) || methods.boolean(arg)) {
+        return value == arg;
+    }
+    return value === arg;
+}
+var methods = {
+    obj: isObject,
+    boolean: function (value) { return typeof value === 'boolean'; },
+    str: function (value) { return typeof value === 'string'; },
+    num: function (value) { return typeof value === 'number'; },
+    arr: function (value) { return Array.isArray(value); },
+    func: function (value) { return typeof value === 'function'; },
+    empty: function (value) { return value ?
+        (Array.isArray(value) ? value.length === 0 : (isObject(value)) ? Object.keys(value).length === 0 : false) : true; },
+    eq: eq,
+    not: function (value, arg) { return !eq(value, arg); },
+    gt: function (value, arg) { return +value > +arg; },
+    gte: function (value, arg) { return +value >= +arg; },
+    lt: function (value, arg) { return +value < +arg; },
+    lte: function (value, arg) { return +value <= +arg; },
+    len: function (value, arg) {
+        return num2str(value).length === +arg;
+    },
+    min: function (value, arg) {
+        return num2str(value).length >= +arg;
+    },
+    max: function (value, arg) {
+        return num2str(value).length <= +arg;
+    },
+    reg: function (value, arg) { return arg.test(value); },
+    has: has,
+    ext: function (value, arg) { return ext(arg).test(value); },
+    enum: function (value, arg1) {
+        var args = [];
+        for (var _i = 2; _i < arguments.length; _i++) {
+            args[_i - 2] = arguments[_i];
+        }
+        return [arg1].concat(args).indexOf(value) > -1;
+    },
+    between: function (value, arg1, arg2) {
+        return +value > +arg1 && +value < +arg2;
+    },
+};
+Object.keys(rules).forEach(function (key) {
+    methods[key] = function (value) {
+        if ([null, undefined].includes(value))
+            value = '';
+        if (typeof value === 'number')
+            value = String(value);
+        return (rules[key]).test(value);
+    };
+});
+
+export default methods;
