@@ -40,3 +40,4 @@ var rules = {
 
 export default rules;
 export { ext };
+//# sourceMappingURL=rules.js.map

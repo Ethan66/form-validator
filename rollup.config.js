@@ -10,7 +10,7 @@ const env = process.env.NODE_ENV
 let commonPlugins = [
   resolve(),
   commonjs(),
-  typescript({ tsconfig: getPath('./tsconfig.json'), useTsconfigDeclarationDir: env.trim() === 'production', extensions: ['.js', '.ts', '.tsx'] })
+  typescript({ tsconfig: getPath('./tsconfig.json'), useTsconfigDeclarationDir: env?.trim() === 'production', extensions: ['.js', '.ts', '.tsx'] })
 ];
 
 let format = 'es'

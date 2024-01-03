@@ -348,7 +348,7 @@ describe('define', () => {
       v.valid(value).any.num.define(r => r > 0).then(() => {
         expect(true).toBe(result)
       }).catch(e => {
-        expect(e.msgs![0] === 'sync校验失败').toBe(!result)
+        expect(e.keys![0] === 'sync').toBe(!result)
       })
     })
   }

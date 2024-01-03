@@ -37,7 +37,7 @@ export default {
   gte: '$name要大于等于$arg1！',
   lt: '$name要小于$arg1！',
   lte: '$name要小于等于$arg1！',
-  between: '$name要大于$arg1，小于$arg2！',
+  between: '$name要大于等于$arg1，小于等于$arg2！',
   len: '$name长度要等于$arg1！',
   min: '$name最小长度应为$arg1！',
   max: '$name最大长度应为$arg1！',

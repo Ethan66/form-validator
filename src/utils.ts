@@ -320,9 +320,10 @@ function checkchain(value: any, chain: Chain, path?: (string | number)[]):
    
     if (type === 'sync') {
       const key = `sync${i || ''}`
-      if (method(value, ...args) === false) {
+      const syncRes = method(value, ...args)
+      if (syncRes !== true) {
         errkeys.push(key)
-        errMsgs.push(`${key}校验失败`)
+        errMsgs.push(syncRes as unknown as string)
         if(_singleMode) break
       } else okeys.push(key)
     } else if (type === 'async') { // 链内异步合并

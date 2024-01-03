@@ -118,3 +118,4 @@ Object.keys(rules).forEach(function (key) {
 });
 
 export default methods;
+//# sourceMappingURL=methods.js.map

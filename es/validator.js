@@ -178,7 +178,7 @@ var messages = {
     gte: '$name要大于等于$arg1！',
     lt: '$name要小于$arg1！',
     lte: '$name要小于等于$arg1！',
-    between: '$name要大于$arg1，小于$arg2！',
+    between: '$name要大于等于$arg1，小于等于$arg2！',
     len: '$name长度要等于$arg1！',
     min: '$name最小长度应为$arg1！',
     max: '$name最大长度应为$arg1！',
@@ -403,9 +403,10 @@ function checkchain(value, chain, path) {
         var args = item[2] || [];
         if (type === 'sync') {
             var key = "sync" + (i || '');
-            if (method.apply(void 0, __spreadArrays([value], args)) === false) {
+            var syncRes = method.apply(void 0, __spreadArrays([value], args));
+            if (syncRes !== true) {
                 errkeys.push(key);
-                errMsgs.push(key + "\u6821\u9A8C\u5931\u8D25");
+                errMsgs.push(syncRes);
             }
             else
                 okeys.push(key);
@@ -586,3 +587,4 @@ var validator = {
 };
 
 export default validator;
+//# sourceMappingURL=validator.js.map

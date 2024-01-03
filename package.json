@@ -1,6 +1,6 @@
 {
   "name": "submit-valid",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "lib/validator.js",
   "module": "es/validator.js",
   "types": "es/validator.d.ts",
@@ -9,8 +9,8 @@
     "es"
   ],
   "scripts": {
-    "build": "set NODE_ENV=production && rollup -c -m",
-    "dev": "rollup -c -w --environment TARGET:dev",
+    "build": "rollup -c -m && set NODE_ENV=production && rollup -c -m",
+    "dev": "rollup -c -m -w --environment TARGET:dev",
     "test": "jest",
     "test-c": "jest --coverage",
     "fix": "eslint --fix ./src/**/*.ts",

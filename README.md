@@ -361,7 +361,7 @@ function msg (n) {
     console.warn('----- my data is e: ', e)
   })
 
-  v.valid(n).num.between(18, 30).msg('between', '$name不仅要大于$arg1，也要小于$arg2！').then(res => {
+  v.valid(n).num.between(18, 30).msg('between', '$name不仅要大于等于$arg1，也要小于等于$arg2！').then(res => {
     console.warn('----- my data is res: ', res)
   }).catch(e => {
     console.warn('----- my data is e: ', e)
@@ -377,6 +377,7 @@ msg(12)
 function define (n) {
   v.valid(n).any.num.define(r => r>0).then(res => {
     console.warn('----- my data is res: ', res)
+    if (false) return 'r不是数字' // return只要不是true，就表示校验失败，return值将会传递给catch
   }).catch(e => {
     console.warn('----- my data is e: ', e)
   })
